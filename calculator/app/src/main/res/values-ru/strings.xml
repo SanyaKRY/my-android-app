@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Калькулятор</string>
+    <string name="field_1">Число 1</string>
+    <string name="field_2">Число 2</string>
+    <string name="operation_1">Плюс</string>
+    <string name="operation_2">Минус</string>
+    <string name="operation_3">Деление</string>
+    <string name="operation_4">Умножение</string>
+    <string name="float_values">Использовать дробные числа</string>
+    <string name="signed_values">Использовать знаковые числа</string>
+    <string name="result_field">Результат</string>
+    <string name="calculate_button">Вычислить</string>
+    <string name="operation_not_found">Выберите выполняемую операцию</string>
+    <string name="field_1_not_found">Введите число 1</string>
+    <string name="field_2_not_found">Введите число 2</string>
+    <string name="field_1_and_2_not_found">Введите число 1 и 2</string>
+    <string name="reset_settings">Сбросить настройки</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">Ок</string>
+    <string name="cannot_divide_by_zero">Нельзя делить на нуль</string>
+    <string name="ooops_something_go_wrong">Ой :! Что-то пошло не так ...</string>
+</resources>

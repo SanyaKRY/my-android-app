@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Сalculator</string>
+    <string name="field_1">Number 1</string>
+    <string name="field_2">Number 2</string>
+    <string name="operation_1">Plus</string>
+    <string name="operation_2">Minus</string>
+    <string name="operation_3">Divide</string>
+    <string name="operation_4">Multiple</string>
+    <string name="float_values">Use float numbers</string>
+    <string name="signed_values">Use signed numbers</string>
+    <string name="result_field">Result</string>
+    <string name="calculate_button">Calculate</string>
+    <string name="operation_not_found">Please, choose an operation</string>
+    <string name="field_1_not_found">Please, type an number 1</string>
+    <string name="field_2_not_found">Please, type an number 2</string>
+    <string name="field_1_and_2_not_found">Please, type an number 1 and 2</string>
+    <string name="reset_settings">Reset settings</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="ooops_something_go_wrong">Ooops:! Something go wrong...</string>
+    <string name="cannot_divide_by_zero">Cannot divide by zero</string>
+</resources>
