@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/from"
+        android:textColor="@color/pink"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="100dp"/>"
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/sharedPrefRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:textStyle="bold"
+            android:text="@string/shared_pref" />
+
+        <RadioButton android:id="@+id/externalRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/external"
+            android:textStyle="bold"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton android:id="@+id/internalRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/internal"
+            android:textStyle="bold"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton android:id="@+id/sqlRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sql"
+            android:textStyle="bold"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+</LinearLayout>
