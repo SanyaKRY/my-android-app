@@ -1,8 +1,25 @@
 package com.example.todolist;
 
-public class Task {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Task implements Parcelable {
     private String title;
     private String description;
+
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
+        @Override
+        public Task createFromParcel(Parcel source) {
+            String title = source.readString();
+            String description = source.readString();
+            return new Task(title, description);
+        }
+
+        @Override
+        public Task[] newArray(int size) {
+            return new Task[size];
+        }
+    };
 
     public Task(String title, String description) {
         this.title = title;
@@ -15,5 +32,16 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
     }
 }

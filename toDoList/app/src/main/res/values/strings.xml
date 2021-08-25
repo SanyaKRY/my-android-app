@@ -14,4 +14,8 @@
     <string name="sql">SQL</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="change_task">Сhange task</string>
+    <string name="delete_task">Delete task</string>
+    <string name="add_task_to_favorites">Add a task to favorites</string>
 </resources>

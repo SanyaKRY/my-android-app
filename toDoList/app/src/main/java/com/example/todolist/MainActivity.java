@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "TAG";
     private static final int ZERO = 0;
 
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "MainActivity onCreate()");
@@ -38,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setNavigationMenu();
     }
 
-    ActionBarDrawerToggle actionBarDrawerToggle;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
     private void setNavigationMenu() {
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
@@ -56,10 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 if (id == R.id.nav_tasks) {
                     Toast.makeText(MainActivity.this, "Tasks",Toast.LENGTH_SHORT).show();
                     intent = new Intent(MainActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 } else if (id == R.id.nav_settings) {
                     Toast.makeText(MainActivity.this, "Settings",Toast.LENGTH_SHORT).show();
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void setTab() {
         Log.d(TAG, "MainActivity setTab()");
         TabHost tabHost = (TabHost) this.findViewById(android.R.id.tabhost);
@@ -129,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
         tabHost.getTabWidget().getChildTabViewAt(ZERO).setBackgroundColor(Color.parseColor("#FF00FF"));
     }
 
+    public static AllTaskAdapter allTaskAdapter;
+
     private void setAllTasks() {
         Log.d(TAG, "MainActivity setAllTasks()");
         ArrayList<Task> taskListAll = new ArrayList();
@@ -136,23 +143,26 @@ public class MainActivity extends AppCompatActivity {
         taskListAll.add(new Task("Покормить кошку", "Кошку можно кормить натуральными продуктами, но имейте в виду, что это не должна быть еда со стола. Можно давать нежирные кисломолочные продукты (творог, кефир), мясные субпродукты (печень, легкое, почки, сердце), мясо (говядину, баранину, крольчатину), рыбу (сельдь, сардины, скумбрию), овощи (кабачки, тыкву, огурцы)."));
         taskListAll.add(new Task("Придумать имя кошке", "Есть один действенный способ как можно назвать кошку. Для этого нужно выбрать любую букву алфавита, и на неё придумать кличку, учитывая пол животного. Затем следует позвать кота придуманным именем."));
         ListView allTaskListView = (ListView) findViewById(R.id.all_tasks);
-        TaskAdapter taskAdapter = new TaskAdapter(this, R.layout.task_list, taskListAll);
-        allTaskListView.setAdapter(taskAdapter);
+        allTaskAdapter = new AllTaskAdapter(this, R.layout.task_list, taskListAll);
+        allTaskListView.setAdapter(allTaskAdapter);
     }
+
+    public static FavouriteTaskAdapter favouriteTaskAdapter;
 
     private void setFavouriteTasks() {
         Log.d(TAG, "MainActivity setFavouriteTasks()");
         ArrayList<Task> taskListFavourite = new ArrayList();
         taskListFavourite.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
         ListView favouriteTaskListView = (ListView) findViewById(R.id.favourite_tasks);
-        TaskAdapter taskAdapter = new TaskAdapter(this, R.layout.task_list, taskListFavourite);
-        favouriteTaskListView.setAdapter(taskAdapter);
+        favouriteTaskAdapter = new FavouriteTaskAdapter(this, R.layout.task_list, taskListFavourite);
+        favouriteTaskListView.setAdapter(favouriteTaskAdapter);
     }
 
     public void addTask(View view) {
         Log.d(TAG, "MainActivity addTask()");
         Toast.makeText(getBaseContext(), "Add button was pressed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, NewTaskActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

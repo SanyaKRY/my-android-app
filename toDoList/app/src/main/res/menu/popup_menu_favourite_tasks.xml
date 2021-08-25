@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_change_task"
+        android:title="@string/change_task"/>
+    <item android:id="@+id/nav_delete_task"
+        android:title="@string/delete_task" />
+</menu>
