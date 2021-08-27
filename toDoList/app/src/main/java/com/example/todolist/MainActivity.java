@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "MainActivity onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        this.setTitle(R.string.tasks);
         setAllTasks();
         setFavouriteTasks();
         setTab();
@@ -49,21 +49,21 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        navigationView = (NavigationView)findViewById(R.id.navigation_View);
+        navigationView = (NavigationView)findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 Intent intent;
                 if (id == R.id.nav_tasks) {
-                    Toast.makeText(MainActivity.this, "Tasks",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.tasks,Toast.LENGTH_SHORT).show();
                     intent = new Intent(MainActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 } else if (id == R.id.nav_settings) {
-                    Toast.makeText(MainActivity.this, "Settings",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.settings,Toast.LENGTH_SHORT).show();
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
