@@ -41,15 +41,15 @@
 
                     <ImageButton
                         android:id="@+id/add_circle_button_all"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="44dp"
                         android:layout_marginBottom="44dp"
                         android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:onClick="addTask"
-                        app:srcCompat="@drawable/add_circle_button" />
+                        app:srcCompat="@drawable/image_button_selector" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,15 +64,15 @@
 
                     <ImageButton
                         android:id="@+id/add_circle_button_favourite"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="44dp"
                         android:layout_marginBottom="44dp"
                         android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:onClick="addTask"
-                        app:srcCompat="@drawable/add_circle_button" />
+                        app:srcCompat="@drawable/image_button_selector" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>
         </LinearLayout>
@@ -83,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemTextAppearance="@style/NavigationStyle"
         app:itemTextColor="@color/blue"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"/>

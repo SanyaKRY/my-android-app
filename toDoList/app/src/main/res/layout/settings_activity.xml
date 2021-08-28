@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:textStyle="bold"
+            android:textStyle="bold" android:textSize="20sp"
             android:text="@string/shared_pref" />
 
             <RadioButton android:id="@+id/externalRadioButton"
@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:text="@string/external"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:onClick="onRadioButtonClicked"/>
 
             <RadioButton android:id="@+id/internalRadioButton"
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content"
             android:text="@string/internal"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:onClick="onRadioButtonClicked"/>
 
             <RadioButton android:id="@+id/sqlRadioButton"
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sql"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
     </LinearLayout>
@@ -66,6 +69,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:itemTextColor="@color/blue"
+        app:itemTextAppearance="@style/NavigationStyle"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>

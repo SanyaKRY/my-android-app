@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAllTasks() {
         Log.d(TAG, "MainActivity setAllTasks()");
-        ArrayList<Task> taskListAll = new ArrayList();
+        ArrayList<Task> taskListAll = new ArrayList<>();
         taskListAll.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
         taskListAll.add(new Task("Покормить кошку", "Кошку можно кормить натуральными продуктами, но имейте в виду, что это не должна быть еда со стола. Можно давать нежирные кисломолочные продукты (творог, кефир), мясные субпродукты (печень, легкое, почки, сердце), мясо (говядину, баранину, крольчатину), рыбу (сельдь, сардины, скумбрию), овощи (кабачки, тыкву, огурцы)."));
         taskListAll.add(new Task("Придумать имя кошке", "Есть один действенный способ как можно назвать кошку. Для этого нужно выбрать любую букву алфавита, и на неё придумать кличку, учитывая пол животного. Затем следует позвать кота придуманным именем."));
@@ -151,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFavouriteTasks() {
         Log.d(TAG, "MainActivity setFavouriteTasks()");
-        ArrayList<Task> taskListFavourite = new ArrayList();
+        ArrayList<Task> taskListFavourite = new ArrayList<>();
         taskListFavourite.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
         ListView favouriteTaskListView = (ListView) findViewById(R.id.favourite_tasks);
         favouriteTaskAdapter = new FavouriteTaskAdapter(this, R.layout.task_list, taskListFavourite);
