@@ -161,6 +161,17 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "MainActivity addTask()");
         Toast.makeText(getBaseContext(), "Add button was pressed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, NewTaskActivity.class);
+        String adapterName = null;
+        switch(view.getId()) {
+            case R.id.add_circle_button_all:
+                adapterName = "all";
+                break;
+            case R.id.add_circle_button_favourite:
+                adapterName = "favourite";
+                break;
+        }
+        intent.putExtra("adapterName", adapterName);
+        intent.putExtra("position", -1);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }

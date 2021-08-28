@@ -62,6 +62,8 @@ public class AllTaskAdapter extends ArrayAdapter<Task> {
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(context, NewTaskActivity.class);
                                         intent.putExtra(Task.class.getSimpleName(), task);
+                                        intent.putExtra("adapterName", "all");
+                                        intent.putExtra("position", position);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                         context.startActivity(intent);
                                         return true;
@@ -99,6 +101,8 @@ public class AllTaskAdapter extends ArrayAdapter<Task> {
                 Toast.makeText(context, task.getTitle(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, NewTaskActivity.class);
                 intent.putExtra(Task.class.getSimpleName(), task);
+                intent.putExtra("adapterName", "all");
+                intent.putExtra("position", position);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 context.startActivity(intent);
             }
