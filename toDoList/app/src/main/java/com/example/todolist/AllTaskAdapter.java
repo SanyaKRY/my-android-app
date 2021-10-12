@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllTaskAdapter extends ArrayAdapter<Task> {
@@ -114,8 +115,31 @@ public class AllTaskAdapter extends ArrayAdapter<Task> {
     public void remove(@Nullable Task object) {
         super.remove(object);
         this.notifyDataSetChanged();
+        saveData();
     }
 
+    @Override
+    public void insert(@Nullable Task object, int index) {
+        super.insert(object, index);
+        this.notifyDataSetChanged();
+        saveData();
+    }
+
+    @Override
+    public void add(@Nullable Task object) {
+        super.add(object);
+        this.notifyDataSetChanged();
+        saveData();
+    }
+
+    void saveData() {
+        ArrayList<Task> taskList =  new ArrayList<>();
+        for(int i=0 ; i<this.getCount() ; i++){
+            Task task = this.getItem(i);
+            taskList.add(task);
+        }
+        JSONStorageHelper.saveAllList(context, taskList);
+    }
 
     private class ViewHolder {
         TextView title, description;

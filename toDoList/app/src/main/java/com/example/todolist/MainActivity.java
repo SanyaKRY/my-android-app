@@ -21,6 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
@@ -137,24 +139,85 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAllTasks() {
         Log.d(TAG, "MainActivity setAllTasks()");
-        ArrayList<Task> taskListAll = new ArrayList<>();
-        taskListAll.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
-        taskListAll.add(new Task("Покормить кошку", "Кошку можно кормить натуральными продуктами, но имейте в виду, что это не должна быть еда со стола. Можно давать нежирные кисломолочные продукты (творог, кефир), мясные субпродукты (печень, легкое, почки, сердце), мясо (говядину, баранину, крольчатину), рыбу (сельдь, сардины, скумбрию), овощи (кабачки, тыкву, огурцы)."));
-        taskListAll.add(new Task("Придумать имя кошке", "Есть один действенный способ как можно назвать кошку. Для этого нужно выбрать любую букву алфавита, и на неё придумать кличку, учитывая пол животного. Затем следует позвать кота придуманным именем."));
+        String storageTypeValue = SettingsActivity.getStorageTypeText(this);
+        Log.d(TAG, "MainActivity setAllTasks() and storageTypeValue: " + storageTypeValue);
+        ArrayList<Task> taskListAll = null;
+        if (storageTypeValue.equals("memory_storage")) {
+            taskListAll = JSONStorageHelper.getDefaultTaskListMemory();
+        } else {
+            switch(storageTypeValue) {
+                case "Shared Pref":
+                    taskListAll = JSONStorageHelper.importJSONFromSharedPreferencesAll(this);
+                    break;
+                case "Internal":
+                    taskListAll = JSONStorageHelper.importJSONFromInternalStorageAll(this);
+                    break;
+                case "External":
+                    taskListAll = JSONStorageHelper.importJSONFromExternalStorageAll(this);
+                    break;
+                case "SQL":
+                    DatabaseAdapter adapter = new DatabaseAdapter(new DatabaseHelper(this));
+                    adapter.open();
+                    taskListAll = adapter.getTasks();
+                    adapter.close();
+                    break;
+                default:
+                    taskListAll = JSONStorageHelper.getDefaultTaskListMemory();
+                    break;
+            }
+        }
         ListView allTaskListView = (ListView) findViewById(R.id.all_tasks);
         allTaskAdapter = new AllTaskAdapter(this, R.layout.task_list, taskListAll);
         allTaskListView.setAdapter(allTaskAdapter);
+//        Log.d(TAG, "MainActivity setAllTasks()");
+//        ArrayList<Task> taskListAll = new ArrayList<>();
+//        taskListAll.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
+//        taskListAll.add(new Task("Покормить кошку", "Кошку можно кормить натуральными продуктами, но имейте в виду, что это не должна быть еда со стола. Можно давать нежирные кисломолочные продукты (творог, кефир), мясные субпродукты (печень, легкое, почки, сердце), мясо (говядину, баранину, крольчатину), рыбу (сельдь, сардины, скумбрию), овощи (кабачки, тыкву, огурцы)."));
+//        taskListAll.add(new Task("Придумать имя кошке", "Есть один действенный способ как можно назвать кошку. Для этого нужно выбрать любую букву алфавита, и на неё придумать кличку, учитывая пол животного. Затем следует позвать кота придуманным именем."));
+//        ListView allTaskListView = (ListView) findViewById(R.id.all_tasks);
+//        allTaskAdapter = new AllTaskAdapter(this, R.layout.task_list, taskListAll);
+//        allTaskListView.setAdapter(allTaskAdapter);
     }
 
     public static FavouriteTaskAdapter favouriteTaskAdapter;
 
     private void setFavouriteTasks() {
         Log.d(TAG, "MainActivity setFavouriteTasks()");
-        ArrayList<Task> taskListFavourite = new ArrayList<>();
-        taskListFavourite.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
+        String storageTypeValue = SettingsActivity.getStorageTypeText(this);
+        ArrayList<Task> taskListFavourite = null;
+        if (storageTypeValue.equals("memory_storage")) {
+            taskListFavourite = JSONStorageHelper.getDefaultFavouriteTaskListMemory();
+        } else {
+            switch(storageTypeValue) {
+                case "Shared Pref":
+                    taskListFavourite = JSONStorageHelper.importJSONFromSharedPreferencesFavourite(this);
+                    break;
+                case "Internal":
+                    taskListFavourite = JSONStorageHelper.importJSONFromInternalStorageFavourite(this);
+                    break;
+                case "External":
+                    taskListFavourite = JSONStorageHelper.importJSONFromExternalStorageFavourite(this);
+                    break;
+                case "SQL":
+                    DatabaseAdapter adapter = new DatabaseAdapter(new SQLiteOpenHelperFavourite(this));
+                    adapter.open();
+                    taskListFavourite = adapter.getTasks();
+                    adapter.close();
+                    break;
+                default:
+                    taskListFavourite = JSONStorageHelper.getDefaultTaskListMemory();
+                    break;
+            }
+        }
         ListView favouriteTaskListView = (ListView) findViewById(R.id.favourite_tasks);
         favouriteTaskAdapter = new FavouriteTaskAdapter(this, R.layout.task_list, taskListFavourite);
         favouriteTaskListView.setAdapter(favouriteTaskAdapter);
+//        Log.d(TAG, "MainActivity setFavouriteTasks()");
+//        ArrayList<Task> taskListFavourite = new ArrayList<>();
+//        taskListFavourite.add(new Task("Купить кошку", "Прежде всего, кошка является символом домашнего уюта, считает зоопсихолог, доцент Московского психолого-педагогического института Мария Сотская."));
+//        ListView favouriteTaskListView = (ListView) findViewById(R.id.favourite_tasks);
+//        favouriteTaskAdapter = new FavouriteTaskAdapter(this, R.layout.task_list, taskListFavourite);
+//        favouriteTaskListView.setAdapter(favouriteTaskAdapter);
     }
 
     public void addTask(View view) {
@@ -198,10 +261,52 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume(){
+        allTaskAdapter.clear();
+        favouriteTaskAdapter.clear();
+        String storageTypeValue = SettingsActivity.getStorageTypeText(this);
+        ArrayList<Task> taskListAll = null;
+        ArrayList<Task> taskListFavourite = null;
+        if (storageTypeValue.equals("memory_storage")) {
+            taskListAll = JSONStorageHelper.getDefaultTaskListMemory();
+            taskListFavourite = JSONStorageHelper.getDefaultFavouriteTaskListMemory();
+        } else {
+            switch(storageTypeValue) {
+                case "Shared Pref":
+                    taskListAll = JSONStorageHelper.importJSONFromSharedPreferencesAll(this);
+                    taskListFavourite = JSONStorageHelper.importJSONFromSharedPreferencesFavourite(this);
+                    break;
+                case "Internal":
+                    taskListAll = JSONStorageHelper.importJSONFromInternalStorageAll(this);
+                    taskListFavourite = JSONStorageHelper.importJSONFromInternalStorageFavourite(this);
+                    break;
+                case "External":
+                    taskListAll = JSONStorageHelper.importJSONFromExternalStorageAll(this);
+                    taskListFavourite = JSONStorageHelper.importJSONFromExternalStorageFavourite(this);
+                    break;
+                case "SQL":
+                    DatabaseAdapter adapter = new DatabaseAdapter(new DatabaseHelper(this));
+                    adapter.open();
+                    taskListAll = adapter.getTasks();
+                    adapter.close();
+
+                    adapter = new DatabaseAdapter(new SQLiteOpenHelperFavourite(this));
+                    adapter.open();
+                    taskListFavourite = adapter.getTasks();
+                    adapter.close();
+                    break;
+                default:
+                    taskListAll = JSONStorageHelper.getDefaultTaskListMemory();
+                    taskListFavourite = JSONStorageHelper.getDefaultTaskListMemory();
+                    break;
+            }
+        }
+        allTaskAdapter.addAll(taskListAll);
+        allTaskAdapter.notifyDataSetChanged();
+        favouriteTaskAdapter.addAll(taskListFavourite);
+        favouriteTaskAdapter.notifyDataSetChanged();
         super.onResume();
         Log.d(TAG, "MainActivity onResume");
     }
-
     @Override
     protected void onRestart(){
         super.onRestart();
